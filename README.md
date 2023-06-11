@@ -9,11 +9,11 @@ A continuación se llevara a cabo las funcionalidades del sistema y como activa 
 
 Se le notificara al usuario con un led de color azul en caso que la temperatura se encuenta estable y no se corre riesgo de insendio. Como se vera en la proxima imagen:
 <br>
-![ESTABLE](alerta-estable.png){withd:80}
+![ESTABLE](alerta-estable.png)
 <br>
 En el caso que se eleve la temperatura ambiente de forma riesgoza se le notificara con un led rojo una posible sobre carga de calor para que tenga cuidado ante un posible insendio. Como se vera en la proxima imagen:
 <br>
-![SOBRECARGA](alerta-sobrecarga.png){withd:80}
+![SOBRECARGA](alerta-sobrecarga.png)
 <br>
 Al detectarse el insendio se informara por display notificando al usuario y se activaran ambos leds de forma intermitente. 
 <br>
