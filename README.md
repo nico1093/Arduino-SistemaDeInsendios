@@ -39,7 +39,7 @@ Se le proporcionara al usuario un control remoto que podra modificar las diferen
 - **Primavera** => 4
 Los botones de accion del control remoto son los de desplazamiento siguiente o anterior. Las funcionalidades del boton son las suiguentes:
 <br>
-![IR](controlIR.png)
+![CONTROLIR](controlIR.png)
 <br>
 <br>
 - **>>|** : Permite modificar la estacion a la siguiente, en este caso sumar 1 al ID (ID+1)
