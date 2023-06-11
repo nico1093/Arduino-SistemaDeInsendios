@@ -33,14 +33,14 @@ En el caso que se identifique el insendio producido a tanto grados Celsius. Se e
 ### Control IR
 
 Se le proporcionara al usuario un control remoto que podra modificar las diferentes estaciones del año a traves de un sensor infrarojo vinculado a dicho control. Permitiendo adminitras las diferentes temperaturas que se encuentran diariamente. Cada estacion es identificada a traves de un ID y este se modificara hacia la derecha o hacia la izquieda. Los ID son los siguientes:
-* Verano    => 1
-* Otoño     => 2
-* Invierno  => 3
-* Primavera => 4
+- **Verano**    => 1
+- **Otoño**     => 2
+- **Invierno**  => 3
+- **Primavera** => 4
 Los botones de accion del control remoto son los de desplazamiento siguiente o anterior. Las funcionalidades del boton son las suiguentes:
 <br>
 ![IR](controlIR.png)
 <br>
 <br>
-* **>>|**: Permite modificar la estacion a la siguiente, en este caso sumar 1 al ID (ID+1)
-* **|<<**: Permite modificar la estacion a la anterior, en este caso restar 1 al ID (ID-1)
+- **>>|** : Permite modificar la estacion a la siguiente, en este caso sumar 1 al ID (ID+1)
+- **|<<** : Permite modificar la estacion a la anterior, en este caso restar 1 al ID (ID-1)
