@@ -41,5 +41,6 @@ Los botones de accion del control remoto son los de desplazamiento siguiente o a
 <br>
 ![CONTROL_IR](controlIR.png)
 <br>
-: Permite modificar la estacion a la siguiente, en este caso sumar 1 al ID (ID+1)<br>
-: Permite modificar la estacion a la anterior, en este caso restar 1 al ID (ID-1)
+
+* **NEXT**: Permite modificar la estacion a la siguiente, en este caso sumar 1 al ID (ID+1)<br>
+* **PREVIUS**: Permite modificar la estacion a la anterior, en este caso restar 1 al ID (ID-1)
