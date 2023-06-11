@@ -7,8 +7,9 @@
 #define TMP 0
 #define INSENDIO 100
 #define CONGELADO -20
-#define COLD_LED 1
-#define HOT_LED 0
+#define COLD_LED 13
+#define HOT_LED 12
+#define ALERTA_CALOR 60
 
 
 //Inicializaciones de elementos
@@ -17,7 +18,6 @@ Servo servo;
 int RECV_PIN = 11;
 int temp;
 int estacion = 1;
-int isAlert = 0;
 
 void setup()
 {
@@ -38,9 +38,10 @@ void loop()
   viewDisplayLCD(estacion, temp);
 
   calculateOpenServo(temp);
-  verificarSobrecargaCalor(temp);
-  verificarSobrecargaFrio(temp);
+  notificarEstadoAmbiente(temp);
   
+   //digitalWrite(COLD_LED, LOW);
+   
 }
 
 void calculateOpenServo(float temp){
@@ -49,12 +50,12 @@ void calculateOpenServo(float temp){
   el servo para caletar o enfriar
   */
   if(temp >= INSENDIO){
-   	servo.write(150);
-    Serial.println("Servo Iniciado: INSENDIO");
+    servo.write(150);
+    Serial.println("Servo Iniciado");
   }
   else{
     servo.write(0);
-  	Serial.println("Servo Apagado");
+    Serial.println("Servo Apagado");
   }
 }
 
@@ -63,9 +64,15 @@ void viewDisplayLCD(int estacion,float temp){
   Realiza lectura de temperatura y estacion del año actual e
   imprime en el desplay
   */
-  desplayEstacion(estacion);
-  desplayTemperatura(temp);
-  delay(1000);
+  if(temp < INSENDIO){
+    desplayEstacion(estacion);
+    desplayTemperatura(temp);
+    delay(1000);
+  }
+  else{
+    lcd.clear();
+    lcd.print("INSENDIO!!!");
+  }
 }
 
 void desplayEstacion(int estacion){
@@ -95,7 +102,7 @@ void desplayTemperatura(float temp){
   */
   lcd.setCursor(0,1);
   lcd.print("Grados: ");
-	lcd.print(temp);
+  lcd.print(temp);
   lcd.print("C°");
 }
 
@@ -130,37 +137,15 @@ int operarDespalyConControl(int idEstacion){
   return idEstacion;
 }
 
-void verificarSobrecargaCalor(float temp){
+void notificarEstadoAmbiente(float temp){
   /*
-  	Verifica la temperatura ambiente y le notifica al usuario
+    Verifica la temperatura ambiente y le notifica al usuario
     ensendiendo una luz roja que se esta sobre calentado el 
-    ambiente. 
+    ambiente, caso contrario le notificara con una luz azul
+    que la temperatura es estable. 
     La sobrecarga se produce a mas de los 75C°.
   */
-  if(temp > 75 && temp < INSENDIO){
-    digitalWrite(HOT_LED, HIGH);
-    Serial.println("Sobrecarga: CALOR");
-  }else{
-    digitalWrite(HOT_LED, LOW);
-  }
-}
-
-void verificarSobrecargaFrio(float temp){
-  /*
-  	Verifica la temperatura ambiente y le notifica al usuario
-    ensendiendo la luz blanca que se encuentra estable.
-  */
-  if(temp <= 75){
-    digitalWrite(COLD_LED, HIGH);
-    Serial.println("Sobrecarga: ESTABLE");
-  }else{
-    digitalWrite(COLD_LED, LOW);
-  }
-}
-
-void verifyTemp(bool verify){
-  /**/
-  if(verify){
+  if(temp >= ALERTA_CALOR && temp < INSENDIO){
     digitalWrite(HOT_LED, HIGH);
     digitalWrite(COLD_LED, LOW);
     Serial.println("Sobrecarga: CALOR");
@@ -169,5 +154,14 @@ void verifyTemp(bool verify){
     digitalWrite(COLD_LED, HIGH);
     digitalWrite(HOT_LED, LOW);
     Serial.println("Sobrecarga: ESTABLE");
+  }
+  if(temp >= INSENDIO){
+    digitalWrite(HOT_LED, HIGH);
+    digitalWrite(COLD_LED, HIGH);
+    delay(500);
+    digitalWrite(HOT_LED, LOW);
+    digitalWrite(COLD_LED, LOW);
+    delay(500);
+    Serial.println("INSENDIOOO!!");
   }
 }
